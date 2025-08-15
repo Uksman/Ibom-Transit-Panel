@@ -125,6 +125,21 @@ export const notificationsAPI = {
   getUnreadCount: () => api.get('/notifications/unread-count'),
 };
 
+// Tickets API
+export const ticketsAPI = {
+  verifyQR: (qrData, conductorId, busId, location) => api.post('/tickets/verify', {
+    qrData,
+    conductorId,
+    busId,
+    location
+  }),
+  getVerifications: (id, type = 'booking') => api.get(`/tickets/${id}/verifications`, {
+    params: { type }
+  }),
+  getVerificationStats: (params = {}) => api.get('/tickets/verification-stats', { params }),
+  manualValidation: (id, data) => api.post(`/tickets/${id}/validate`, data),
+};
+
 // Dashboard API (if needed)
 export const dashboardAPI = {
   getStats: () => api.get('/dashboard/stats'),
